@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::resource('tipoproduto', 'TipoProdutoController');
 Route::resource('produto', 'ProdutoController');
+Route::resource('endereco', 'EnderecoController');
 
 // Rotas para o Controlador Pedido
 Route::get('/pedido', 'PedidoController@index')->name('pedido.index');
