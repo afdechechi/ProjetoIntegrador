@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Endereco;
 
 class EnderecoController extends Controller
@@ -26,8 +25,10 @@ class EnderecoController extends Controller
      */
     private function indexMessage($message)
     {
+        // Pega o usuário logado
+        $user_id = 1;
         // Buscar os dados que estão na tabela Produtos
-        $enderecos = DB::select("select Enderecos.id, Enderecos.bairro, Enderecos.logradouro, Enderecos.numero, Enderecos.complemento from Enderecos");                        
+        $enderecos = Endereco::where('Users_id', $user_id)->get();
         return view('Endereco.index')->with('enderecos', $enderecos)->with('message', $message);
     }
 
@@ -38,10 +39,8 @@ class EnderecoController extends Controller
      */
     public function create()
     {
-        // Buscar os dados que estão na tabela Tipo_Produtos
-           return view('Endereco.create');
+        return view('Endereco.create');
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -51,25 +50,27 @@ class EnderecoController extends Controller
      */
     public function store(Request $request)
     {
+        // Pega o id do usuário logado
+        $user_id = 1;
+        
         $endereco = new Endereco();
-        $endereco->Users_id = 1;
+        $endereco->Users_id = $user_id;
         $endereco->bairro = $request->bairro;
         $endereco->logradouro = $request->logradouro;
         $endereco->numero = $request->numero;
         $endereco->complemento = $request->complemento;
-
         try{
             $endereco->save();
         } catch (\Throwable $th) {
             // Constrói a mensagem
             $message['type'] = 'danger';
-            $message['message'] = "Problema ao salvar um recurso: " . $th->getMessage();
+            $message['message'] = "Problema ao salvar o endereço: " . $th->getMessage();
             // Retorna a execução do método indexMessage
             return $this->indexMessage($message);
         }
         // Constrói a mensagem
         $message['type'] = 'success';
-        $message['message'] = 'Recurso cadastrado com sucesso';
+        $message['message'] = 'Endereço cadastrado com sucesso';
         // Retorna a execução do método indexMessage
         return $this->indexMessage($message);
     }
@@ -86,13 +87,11 @@ class EnderecoController extends Controller
         $endereco = Endereco::find($id);
         if(isset($endereco))
         {
-          // Busca o dado que está na tabela Tipo_Produtos
-          return view('Endereco.show')->with('endereco', $endereco);
+            return view('Endereco.show')->with('endereco', $endereco);
         }
-    
         // Constrói a mensagem
         $message['type'] = 'danger';
-        $message['message'] = 'Recurso não encontrado';
+        $message['message'] = 'Endereço não encontrado';
         // Retorna a execução do método indexMessage
         return $this->indexMessage($message);
     }
@@ -108,14 +107,12 @@ class EnderecoController extends Controller
         // Buscar os dados que estão na tabela Tipo_Produtos
         $endereco = Endereco::find($id);
         if(isset($endereco))
-       {
-    
+        {
             return view('Endereco.edit')->with('endereco', $endereco);
         }
-    
         // Constrói a mensagem
         $message['type'] = 'danger';
-        $message['message'] = 'Recurso não encontrado';
+        $message['message'] = 'Endereco não encontrado.';
         // Retorna a execução do método indexMessage
         return $this->indexMessage($message);
     }
@@ -129,32 +126,32 @@ class EnderecoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Buscar os dados que estão na tabela Tipo_Produtos
+        // Buscar os dados que estão na tabela Endereco
         $endereco = Endereco::find($id);
         if(isset($endereco))
         {
+            $endereco->bairro = $request->bairro;
             $endereco->logradouro = $request->logradouro;
             $endereco->numero = $request->numero;
-            $endereco->bairro = $request->bairro;
             $endereco->complemento = $request->complemento;
             try {
                 $endereco->update();
             } catch (\Throwable $th) {
                 // Constrói a mensagem
                 $message['type'] = 'danger';
-                $message['message'] = "Problema ao atualizar um recurso: " . $th->getMessage();
+                $message['message'] = "Problema ao atualizar o endereço: " . $th->getMessage();
                 // Retorna a execução do método indexMessage
                 return $this->indexMessage($message);
             }
             // Constrói a mensagem
             $message['type'] = 'success';
-            $message['message'] = 'Recurso atualizado com sucesso';
+            $message['message'] = 'Endereço atualizado com sucesso';
             // Retorna a execução do método indexMessage
             return $this->indexMessage($message);
         }
         // Constrói a mensagem
         $message['type'] = 'danger';
-        $message['message'] = 'Recurso não encontrado';
+        $message['message'] = 'Endereço não encontrado';
         // Retorna a execução do método indexMessage
         return $this->indexMessage($message);
     }
@@ -175,19 +172,19 @@ class EnderecoController extends Controller
             } catch (\Throwable $th) {
                 // Constrói a mensagem
                 $message['type'] = 'danger';
-                $message['message'] = "Problema ao remover um recurso: " . $th->getMessage();
+                $message['message'] = "Problema ao remover o endereço: " . $th->getMessage();
                 // Retorna a execução do método indexMessage
                 return $this->indexMessage($message);
             }
             // Constrói a mensagem
             $message['type'] = 'success';
-            $message['message'] = 'Recurso removido com sucesso';
+            $message['message'] = 'Endereço removido com sucesso';
             // Retorna a execução do método indexMessage
             return $this->indexMessage($message);
         }
         // Constrói a mensagem
         $message['type'] = 'danger';
-        $message['message'] = 'Recurso não encontrado';
+        $message['message'] = 'Endereço não encontrado';
         // Retorna a execução do método indexMessage
         return $this->indexMessage($message);
     }

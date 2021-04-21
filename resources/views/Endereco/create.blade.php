@@ -14,26 +14,24 @@
             <div class="form-group">
               <label for="input-ID">ID</label>
               <input type="text" class="form-control" id="input-ID" aria-describedby="ID-help" value="#" disabled>
-              <small id="ID-help" class="form-text text-muted">Não é necessário informor um ID para cadastrar um novo recurso</small>
+              <small id="ID-help" class="form-text text-muted">Não é necessário informor um ID para cadastrar um novo endereço</small>
             </div>
-            
             <div class="form-group">
-              <label for="input-logradouro">Logradouro</label>
-              <input name="logradouro" type="text" class="form-control" id="input-logradouro" placeholder="Informe o logradouro do recurso">
+              <label for="input-bairro">Bairro</label>
+              <input name="bairro" type="text" class="form-control" id="input-bairro" placeholder="Informe o bairro do endereço">
+            </div>
+            <div class="form-group">
+                <label for="input-logradouro">Logradouro</label>
+                <input name="logradouro" type="text" class="form-control" id="input-logradouro" placeholder="Informe o logradouro do endereço">
             </div>
             <div class="form-group">
                 <label for="input-numero">Número</label>
-                <input name="numero" type="text" class="form-control" id="input-numero" placeholder="Informe o número do recurso">
+                <input name="numero" type="text" class="form-control" id="input-numero" placeholder="Informe o número do endereço">
             </div>
             <div class="form-group">
-                <label for="input-bairro">Bairro</label>
-                <input name="bairro" type="text" class="form-control" id="input-bairro" placeholder="Informe o bairro do recurso">
-              </div>
-              <div class="form-group">
                 <label for="input-complemento">Complemento</label>
-                <input name="complemento" type="text" class="form-control" id="input-complemento" placeholder="Informe o complemento do recurso">
-              </div>
-            
+                <input name="complemento" type="text" class="form-control" id="input-complemento" placeholder="Informe o complemento do endereço">
+            </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a href={{route('endereco.index')}} class="btn btn-primary">Voltar</a>
         </form>

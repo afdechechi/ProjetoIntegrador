@@ -14,24 +14,24 @@
             <input name="_method" type="hidden" value="PUT">
             <div class="form-group">
               <label for="input-ID">ID</label>
-              <input type="text" class="form-control" id="input-ID" value={{$endereco->id}} disabled>
+              <input type="text" class="form-control" id="input-ID" value="{{$endereco->id}}" disabled>
+            </div>
+            <div class="form-group">
+              <label for="input-bairro">Bairro</label>
+              <input name="bairro" type="text" class="form-control" id="input-bairro" placeholder="Informe o bairro do endereço" value="{{$endereco->bairro}}">
             </div>
             <div class="form-group">
                 <label for="input-logradouro">Logradouro</label>
-                <input name="logradouro" type="text" class="form-control" id="input-logradouro" placeholder="Informe o logradouro do recurso" value='{{$endereco->logradouro}}'>
-              </div>
-              <div class="form-group">
-                  <label for="input-numero">Número</label>
-                  <input name="numero" type="text" class="form-control" id="input-numero" placeholder="Informe o número do recurso" value={{$endereco->numero}}>
-              </div>
-              <div class="form-group">
-                  <label for="input-bairro">Bairro</label>
-                  <input name="bairro" type="text" class="form-control" id="input-bairro" placeholder="Informe o bairro do recurso" value='{{$endereco->bairro}}'>
-                </div>
-                <div class="form-group">
-                  <label for="input-complemento">Complemento</label>
-                  <input name="complemento" type="text" class="form-control" id="input-complemento" placeholder="Informe o complemento do recurso" value='{{$endereco->complemento}}'>
-                </div>
+                <input name="logradouro" type="text" class="form-control" id="input-logradouro" placeholder="Informe o logradouro do endereço" value="{{$endereco->logradouro}}">
+            </div>
+            <div class="form-group">
+                <label for="input-numero">Número</label>
+                <input name="numero" type="text" class="form-control" id="input-numero" placeholder="Informe o número do endereço" value="{{$endereco->numero}}">
+            </div>
+            <div class="form-group">
+                <label for="input-complemento">Complemento</label>
+                <input name="complemento" type="text" class="form-control" id="input-complemento" placeholder="Informe o complemento do endereço" value="{{$endereco->complemento}}">
+            </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
             <a href={{route('endereco.index')}} class="btn btn-primary">Voltar</a>
         </form>

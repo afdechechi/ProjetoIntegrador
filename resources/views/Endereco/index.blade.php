@@ -5,27 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Index de Endereço</title>
+    <title>Index de Endereços</title>
 </head>
 <body>
     <div class="container">
         @if (isset($message))
-        <div class="alert alert-{{$message['type']}} alert-dismissible fade show" role="alert">
-            <strong>{{$message['message']}}.</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-        <a href={{route('endereco.create')}} class="btn btn-primary">Criar um Endereço</a>
+            <div class="alert alert-{{$message['type']}} alert-dismissible fade show" role="alert">
+                <strong>{{$message['message']}}.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        <a href={{route('endereco.create')}} class="btn btn-primary">Cadastrar um novo Endereço</a>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Bairro</th>
                     <th scope="col">Logradouro</th>
                     <th scope="col">Número</th>
-                    <th scope="col">Bairro</th>
                     <th scope="col">Complemento</th>
                     <th scope="col">Ação</th>
                 </tr>
@@ -34,15 +33,15 @@
                 @foreach ($enderecos as $endereco)
                     <tr>
                         <th scope="row">{{$endereco->id}}</th>
+                        <td>{{$endereco->bairro}}</td>
                         <td>{{$endereco->logradouro}}</td>
                         <td>{{$endereco->numero}}</td>
-                        <td>{{$endereco->bairro}}</td>
                         <td>{{$endereco->complemento}}</td>
                         <td>
                             <a href={{route('endereco.show', $endereco->id)}} class="btn btn-primary">Show</a>
                             <a href={{route('endereco.edit', $endereco->id)}} class="btn btn-info">Edit</a>
                             <a href="#" class="btn btn-danger destroyButton" data-toggle="modal" data-target="#destroyModal" value={{route('endereco.destroy', $endereco->id)}}>Destroy</a>
-                        </td>    
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -54,13 +53,13 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Remover recurso</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Remover endereço</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
-            Deseja realmente remover este recurso?
+            Deseja realmente remover este endereço?
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
